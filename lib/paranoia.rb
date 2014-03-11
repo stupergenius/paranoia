@@ -105,7 +105,7 @@ module Paranoia
     destroyed_associations.each do |association|
       association_data = send(association.name)
 
-      if association_data.paranoid?
+      if not association_data.nil? and association_data.paranoid?
         if association.collection?
           association_data.only_deleted.each { |record| record.restore(:recursive => true) }
         else
